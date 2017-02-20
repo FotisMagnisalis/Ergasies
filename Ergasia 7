@@ -2,8 +2,8 @@ import tweepy
 import csv
 from tweepy import OAuthHandler
 
-consumer_key = 'NG754bd6sD8FbaS6GUdDP3HSS'
-consumer_secret = 'AqESZkMrUgfxH4i13JA2Dv70zjQdaSCkUmzaTxzjAnO2SyHI2X'
+consumer_key = 'YOUR-CONSUMER-KEY'
+consumer_secret = 'YOUR-CONSUMER-SECRET'
 access_key = '2459953220-aVE1GP3cxnjm3QHPAi5SNhDx4sDXNk5BTt3pKBf'
 access_secret = 'dK9NwsXN7AEPF41xkKXpRlXyuHbEA6WJkvBHNWJadoYdF'
 counter = 0
