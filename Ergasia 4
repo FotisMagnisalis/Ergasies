@@ -1,0 +1,18 @@
+from math import sqrt
+lst=input()
+dev = map(int, lst)
+for i in range(2):
+     mx = max(dev)
+     mn = min(dev)
+     dev = [x for x in dev if x !=mx]
+     dev = [x for x in dev if x !=mn]
+snl = len(dev)
+athroisma = sum(dev)
+mesh_timh = athroisma/snl
+sum = 0
+for i in range(snl):
+    sum += (dev[i]-mesh_timh)**2
+snl2=snl-1
+s2 = sum/snl2
+apkl = sqrt(s2)
+print apkl
