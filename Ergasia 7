@@ -1,0 +1,46 @@
+import tweepy
+import csv
+from tweepy import OAuthHandler
+
+consumer_key = 'NG754bd6sD8FbaS6GUdDP3HSS'
+consumer_secret = 'AqESZkMrUgfxH4i13JA2Dv70zjQdaSCkUmzaTxzjAnO2SyHI2X'
+access_key = '2459953220-aVE1GP3cxnjm3QHPAi5SNhDx4sDXNk5BTt3pKBf'
+access_secret = 'dK9NwsXN7AEPF41xkKXpRlXyuHbEA6WJkvBHNWJadoYdF'
+counter = 0
+user1 = "realDonaldTrump"
+user2 = "BarackObama"
+def get_all_tweets(counter,screen_name):
+	auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+	auth.set_access_token(access_key, access_secret)
+	api = tweepy.API(auth)
+	alltweets = []	#lista tweets
+	new_tweets = api.user_timeline(screen_name = screen_name,count=1)
+	alltweets.extend(new_tweets)
+	oldest = alltweets[-1].id - 1
+	counter = "Tweeter"
+	for i in range(9):
+		print "getting tweets before %s" % (oldest)
+		new_tweets = api.user_timeline(screen_name = screen_name,count=1,max_id=oldest)
+		alltweets.extend(new_tweets)
+		alltweetsstr = str(alltweets)
+		counter = counter + alltweetsstr
+		oldest = alltweets[-1].id - 1
+		print "...%s tweets downloaded so far" % (len(alltweets))
+
+	outtweets = [[tweet.id_str, tweet.created_at, tweet.text.encode("utf-8")] for tweet in alltweets]
+
+	with open('%s_tweets.csv' % screen_name, 'wb') as f:
+		writer = csv.writer(f)
+		writer.writerow(["id","created_at","text"])
+		writer.writerows(outtweets)
+        return counter
+if __name__ == '__main__':
+	c1 = get_all_tweets(counter,user1)
+
+if __name__ == '__main__':
+	c2 = get_all_tweets(counter,user2)
+
+if c1>c2:
+      print  "user1 has more characters in his last 10 tweets"
+else: 
+      print  "user2 has more characters in his last 10 tweets"
