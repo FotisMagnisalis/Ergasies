@@ -1,0 +1,25 @@
+import tweepy
+import csv
+from tweepy import OAuthHandler
+
+consumer_key = ''
+consumer_secret = ''
+access_key = ''
+access_secret = ''
+auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+auth.set_access_token(access_key, access_secret)
+api = tweepy.API(auth)
+counter1 = 0
+counter2 = 0
+user1 = "realDonaldTrump"
+user2 = "BarackObama"
+for status in tweepy.Cursor(api.user_timeline, screen_name=user1).items(10):
+    counter1 = counter1 + len(status.text)
+for status in tweepy.Cursor(api.user_timeline, screen_name=user2).items(10):
+    counter2 = counter2 + len(status.text)
+if counter1 > counter2:
+    print user1
+if counter1 < counter2:
+         print user2
+else:
+    print "They are equal"
