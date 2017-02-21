@@ -1,0 +1,41 @@
+import tweepy
+import csv
+from tweepy import OAuthHandler
+
+consumer_key = ''
+consumer_secret = ''
+access_key = ''
+access_secret = ''
+auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+auth.set_access_token(access_key, access_secret)
+api = tweepy.API(auth)
+followers1 = []
+followers2 = []
+counter1 = 0
+counter2 = 0
+einai = 0
+for user in tweepy.Cursor(api.followers, screen_name="NecroWtf319").items():
+    followers1.append(user.screen_name)
+for user in tweepy.Cursor(api.followers, screen_name="R0CknMetAlFan").items():
+    followers2.append(user.screen_name)
+
+c1 = len(followers1)
+c2 = len(followers2)
+if c1>c2:
+      counter1 = c1
+      counter2 = c2
+      for i in range(counter1):
+          for j in range(counter2):
+              if followers1[i] == followers2[j]:
+                 print followers1[i]
+                 einai = 1
+else:
+       counter1 = c2
+       counter2 = c1
+       for i in range(counter1):
+           for j in range(counter2):
+               if followers2[i] == followers1[j]:
+                  print followers2[i]
+                  einai = 1
+if einai == 0:
+    print "No common followers"
